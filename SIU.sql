@@ -12,6 +12,7 @@ CREATE TABLE alumnos
   telefono_alumno VARCHAR(45),
   email_alumno VARCHAR(20),
   estatus_alumno VARCHAR(1),
+  solvencia varchar(1),
   PRIMARY KEY (carnet_alumno)
 ) ENGINE = InnoDB DEFAULT CHARSET=latin1;
 
@@ -102,15 +103,18 @@ CREATE TABLE jornadas
 -- -----------------------------------------------------
 CREATE TABLE asignacioncursosalumnos
 (
+  
   codigo_carrera VARCHAR(5),
   codigo_sede VARCHAR(5),
   codigo_jornada VARCHAR(5),
   codigo_seccion VARCHAR(5),
   codigo_aula VARCHAR(5),
   codigo_curso VARCHAR(5),
-  carnet_alumno VARCHAR(15),
-  nota_asignacioncursoalumnos FLOAT(10,2), 
-  PRIMARY KEY (codigo_carrera, codigo_sede, codigo_jornada, codigo_seccion, codigo_aula, codigo_curso, carnet_alumno),
+  carnet_alumno VARCHAR(15),	
+  tipo_nota VARCHAR(50),
+  nota_asignacioncursoalumnos VARCHAR(4), 
+
+  PRIMARY KEY ( codigo_carrera, codigo_sede, codigo_jornada, codigo_seccion, codigo_aula, codigo_curso, carnet_alumno, tipo_nota),
   FOREIGN KEY (codigo_carrera) REFERENCES carreras(codigo_carrera),
   FOREIGN KEY (codigo_sede) REFERENCES sedes(codigo_sede),
   FOREIGN KEY (codigo_jornada) REFERENCES jornadas(codigo_jornada),
@@ -140,4 +144,26 @@ CREATE TABLE asignacioncursosmastros
   FOREIGN KEY (codigo_curso) REFERENCES cursos(codigo_curso),
   FOREIGN KEY (codigo_maestro) REFERENCES maestros(codigo_maestro)
   ) ENGINE = InnoDB DEFAULT CHARSET=latin1;
+  
+  -- -----------------------------------------------------
+-- Table `educativo`.`Usuarios`
+-- -----------------------------------------------------
 
+CREATE TABLE usuarios
+(
+  
+  nombre_usuario VARCHAR(15),
+  pass_usuario VARCHAR(15),
+  PRIMARY KEY (nombre_usuario)
+ 
+  ) ENGINE = InnoDB DEFAULT CHARSET=latin1;
+  
+  -- -----------------------------------------------------
+-- Table `tipo_nota`.`Usuarios`
+-- -----------------------------------------------------
+CREATE TABLE tipo_notas(
+id_tipo int primary key auto_increment,
+nombre_tipo varchar(50)
+)ENGINE = InnoDB DEFAULT CHARSET=latin1;
+
+insert into usuarios values("admin","12345"); 
